@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<acl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <resources>
+        <resource id="Magento_Backend::admin">
+            <resource id="Octocub_PageSpeedOptimizer::config" title="Octocub GPS Config" sortOrder="10"/>
+            <resource id="Octocub_PageSpeedOptimizer::cron" title="Octocub Cron Tasks" sortOrder="20"/>
+        </resource>
+    </resources>
+</acl>
