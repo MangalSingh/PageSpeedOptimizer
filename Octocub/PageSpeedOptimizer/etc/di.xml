@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Framework\App\FrontController">
+        <plugin name="octocub_gps_optimize_html"
+                type="Octocub\PageSpeedOptimizer\Plugin\FrontController\OptimizeHtmlPlugin"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\MediaStorage\Model\File\Uploader">
+        <plugin name="octocub_gps_enqueue_upload"
+                type="Octocub\PageSpeedOptimizer\Plugin\MediaStorage\EnqueueUploadedImagePlugin"
+                sortOrder="10"/>
+    </type>
+
+</config>

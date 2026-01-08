@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Octocub_PageSpeedOptimizer::cron"
+             title="Cron Tasks List"
+             module="Octocub_PageSpeedOptimizer"
+             sortOrder="999"
+             parent="Magento_Backend::system"
+             action="octocub_gps/cron/index"
+             resource="Octocub_PageSpeedOptimizer::cron"/>
+    </menu>
+</config>

@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="octocub_gps" translate="label" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Octocub Page Speed Optimizer</label>
+            <tab>general</tab>
+            <resource>Octocub_PageSpeedOptimizer::config</resource>
+
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Optimizer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_user_agents" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable User-Agent Device Groups</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_link_headers" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Link Preload Headers (Server Push style)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="html_minify" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minify HTML Output</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="inline_css_minify" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minify Inline CSS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="lazyload" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Lazy Load</label>
+                <field id="default_strategy" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Lazy Strategy</label>
+                    <source_model>Octocub\PageSpeedOptimizer\Model\Config\Source\LazyStrategy</source_model>
+                </field>
+                <field id="page_rules_json" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Per-Page Strategy Rules (JSON)</label>
+                    <comment><![CDATA[
+Example:
+[
+ {"pattern":"cms_index_index","device":"*","strategy":"native"},
+ {"pattern":"catalog_product_view","device":"mobile","strategy":"io_lqip"},
+ {"pattern":"checkout_index_index","device":"*","strategy":"native"}
+]
+pattern can be fullActionName OR substring match.
+]]></comment>
+                </field>
+            </group>
+
+            <group id="preload" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Preload</label>
+                <field id="desktop_images" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Desktop Image Preloads (one per line)</label>
+                </field>
+                <field id="mobile_images" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Mobile Image Preloads (one per line)</label>
+                </field>
+                <field id="tablet_images" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tablet Image Preloads (one per line)</label>
+                </field>
+                <field id="font_preloads" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Preloads (woff2 URLs, one per line)</label>
+                </field>
+            </group>
+
+            <group id="image" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Optimization</label>
+                <field id="auto_optimize_uploads" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Automatically Optimize New Uploads</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="smart_optimize_viewed_pages" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Smart Optimize Viewed Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_webp" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable WebP</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_avif" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable AVIF</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="resize_algorithm" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Resize Algorithm</label>
+                    <source_model>Octocub\PageSpeedOptimizer\Model\Config\Source\ResizeAlgorithm</source_model>
+                </field>
+                <field id="quality_jpeg" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>JPEG Quality (1-100)</label>
+                </field>
+                <field id="quality_webp" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>WebP Quality (1-100)</label>
+                </field>
+                <field id="quality_avif" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AVIF Quality (1-63 typical)</label>
+                </field>
+            </group>
+
+            <group id="core_toggles" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Magento Core Asset Toggles</label>
+
+                <field id="enable_js_bundling" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable JS Bundling</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Octocub\PageSpeedOptimizer\Model\Config\Backend\CoreMirror</backend_model>
+                </field>
+
+                <field id="minify_js" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minify JS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Octocub\PageSpeedOptimizer\Model\Config\Backend\CoreMirror</backend_model>
+                </field>
+
+                <field id="merge_js" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Merge JS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Octocub\PageSpeedOptimizer\Model\Config\Backend\CoreMirror</backend_model>
+                </field>
+
+                <field id="minify_css" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minify CSS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Octocub\PageSpeedOptimizer\Model\Config\Backend\CoreMirror</backend_model>
+                </field>
+
+                <field id="merge_css" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Merge CSS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Octocub\PageSpeedOptimizer\Model\Config\Backend\CoreMirror</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
