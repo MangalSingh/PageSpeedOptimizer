@@ -1,3 +1,5 @@
+**PageSpeedOptimizer**
+
 Google Page Speed Optimizer Magento 2 Free Extension
 
 Magento 2.4 and Magento 2.3 compatibility
