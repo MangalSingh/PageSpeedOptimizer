@@ -1,0 +1,57 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$collectionFactory = $om->get(\Magento\Cron\Model\ResourceModel\Schedule\CollectionFactory::class);
+$collection = $collectionFactory->create()
+    ->setOrder('schedule_id','DESC')
+    ->setPageSize(100);
+
+$status = (string)$block->getRequest()->getParam('status');
+$job = (string)$block->getRequest()->getParam('job_code');
+if ($status) $collection->addFieldToFilter('status', $status);
+if ($job) $collection->addFieldToFilter('job_code', ['like' => "%$job%"]);
+?>
+
+<div class="admin__fieldset">
+  <form method="get">
+    <div class="admin__field">
+      <label class="admin__field-label">Job Code</label>
+      <div class="admin__field-control">
+        <input class="admin__control-text" name="job_code" value="<?= $block->escapeHtml($job) ?>">
+      </div>
+    </div>
+    <div class="admin__field">
+      <label class="admin__field-label">Status</label>
+      <div class="admin__field-control">
+        <input class="admin__control-text" name="status" value="<?= $block->escapeHtml($status) ?>">
+      </div>
+    </div>
+    <button class="action-default scalable" type="submit"><span>Filter</span></button>
+  </form>
+</div>
+
+<table class="data-grid">
+  <thead>
+    <tr>
+      <th>ID</th><th>Job</th><th>Status</th><th>Scheduled</th><th>Executed</th><th>Finished</th><th>Message</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($collection as $row): ?>
+    <tr>
+      <td><?= (int)$row->getScheduleId() ?></td>
+      <td><?= $block->escapeHtml($row->getJobCode()) ?></td>
+      <td><?= $block->escapeHtml($row->getStatus()) ?></td>
+      <td><?= $block->escapeHtml($row->getScheduledAt()) ?></td>
+      <td><?= $block->escapeHtml($row->getExecutedAt()) ?></td>
+      <td><?= $block->escapeHtml($row->getFinishedAt()) ?></td>
+      <td><?= $block->escapeHtml(mb_strimwidth((string)$row->getMessages(), 0, 160, '...')) ?></td>
+      <td>
+        <a class="action-default" href="<?= $block->getUrl('octocub_gps/cron/runNow', ['job_code' => $row->getJobCode()]) ?>">Run now</a>
+        &nbsp;|&nbsp;
+        <a class="action-default" href="<?= $block->getUrl('octocub_gps/cron/delete', ['schedule_id' => $row->getScheduleId()]) ?>">Delete</a>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+  </tbody>
+</table>
